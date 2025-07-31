@@ -74,17 +74,32 @@
         .icon-link:hover i { transform: scale(1.1); color: var(--accent-hover-color); }
         .icon-link i { color: var(--accent-color); transition: all 0.2s ease-in-out; }
         .interactive-list { list-style: none; padding-left: 0; }
-        .interactive-list li { position: relative; padding-left: 25px; transition: background-color 0.2s; }
-        .interactive-list li::before {
+        .interactive-list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-left: 25px;
+            position: relative;
+        }
+        .interactive-list-item::before {
             content: '>';
             position: absolute;
             left: 0;
-            top: 2px;
+            top: 50%;
+            transform: translateY(-50%);
             color: var(--accent-color);
             font-weight: bold;
             transition: color 0.2s, transform 0.2s;
         }
-        .interactive-list li:hover::before { color: var(--accent-hover-color); transform: translateX(3px); }
+        .interactive-list-item:hover::before { color: var(--accent-hover-color); transform: translateY(-50%) translateX(3px); }
+        .credential-actions { display: flex; gap: 0.75rem; }
+        .credential-actions a, .credential-actions button {
+            color: var(--text-light-color);
+            transition: color 0.2s;
+        }
+        .credential-actions a:hover, .credential-actions button:hover {
+            color: var(--accent-hover-color);
+        }
         .card-hover { transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; }
         .card-hover:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); }
         .loader {
@@ -167,6 +182,36 @@
         }
         #chat-input::placeholder { color: var(--text-light-color); }
         .print-hide { display: flex; }
+        
+        #certificate-viewer {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+        }
+        #certificate-viewer img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+        }
+        #close-viewer {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        
         @media print {
             .print-hide { display: none; }
             body { background-color: #ffffff; color: #000000; }
@@ -316,12 +361,36 @@
 
             <section id="achievements">
                 <h3 class="text-2xl font-bold mb-4 section-title pb-1">Achievements & Certifications</h3>
-                <ul class="interactive-list space-y-2">
-                    <li><span class="font-semibold" style="color: var(--text-strong-color);">ICPC Honorable Mentions (x2):</span> Recognized for strong algorithmic problem-solving skills in regional ICPC competitions.</li>
-                    <li><span class="font-semibold" style="color: var(--text-strong-color);">Master Retrieval-Augmented Generation (RAG)</span> Certification.</li>
-                    <li><span class="font-semibold" style="color: var(--text-strong-color);">Meta Back-End Developer</span> Professional Certificate.</li>
-                    <li><span class="font-semibold" style="color: var(--text-strong-color);">HackerRank Software Engineer Intern</span> Certificate.</li>
-                </ul>
+                <div class="space-y-3">
+                    <div class="interactive-list-item">
+                        <span class="flex-grow"><span class="font-semibold" style="color: var(--text-strong-color);">ICPC Honorable Mentions (x2):</span> Recognized for strong algorithmic problem-solving skills.</span>
+                        <div class="credential-actions">
+                            <a href="https://icpc.global/ICPCID/YHNNR9Z8ZE7J" target="_blank" title="View Credential"><i class="fas fa-link"></i></a>
+                            <button class="view-cert-btn" data-src="ICPC.pdf" title="View Certificate"><i class="fas fa-eye"></i></button>
+                        </div>
+                    </div>
+                    <div class="interactive-list-item">
+                        <span class="flex-grow"><span class="font-semibold" style="color: var(--text-strong-color);">Master Retrieval-Augmented Generation (RAG)</span> Certification.</span>
+                        <div class="credential-actions">
+                            <a href="#" target="_blank" title="View Credential"><i class="fas fa-link"></i></a>
+                            <button class="view-cert-btn" data-src="https://placehold.co/1200x800/161b22/c9d1d9?text=RAG+Certificate" title="View Certificate"><i class="fas fa-eye"></i></button>
+                        </div>
+                    </div>
+                    <div class="interactive-list-item">
+                        <span class="flex-grow"><span class="font-semibold" style="color: var(--text-strong-color);">Meta Back-End Developer</span> Professional Certificate.</span>
+                        <div class="credential-actions">
+                            <a href="#" target="_blank" title="View Credential"><i class="fas fa-link"></i></a>
+                            <button class="view-cert-btn" data-src="https://placehold.co/1200x800/161b22/c9d1d9?text=Meta+Certificate" title="View Certificate"><i class="fas fa-eye"></i></button>
+                        </div>
+                    </div>
+                    <div class="interactive-list-item">
+                        <span class="flex-grow"><span class="font-semibold" style="color: var(--text-strong-color);">HackerRank Software Engineer Intern</span> Certificate.</span>
+                        <div class="credential-actions">
+                            <a href="https://www.hackerrank.com/certificates/iframe/90e569378b7d" target="_blank" title="View Credential"><i class="fas fa-link"></i></a>
+                            <button class="view-cert-btn" data-src="SWEI_HR.pdf" title="View Certificate"><i class="fas fa-eye"></i></button>
+                        </div>
+                    </div>
+                </div>
             </section>
         </main>
     </div>
