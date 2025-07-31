@@ -385,7 +385,7 @@
                         <span class="flex-grow"><span class="font-semibold" style="color: var(--text-strong-color);">ICPC Honorable Mentions (x2):</span> Recognized for strong algorithmic problem-solving skills.</span>
                         <div class="credential-actions">
                             <a href="https://icpc.global/ICPCID/YHNNR9Z8ZE7J" target="_blank" title="View Credential"><i class="fas fa-link"></i></a>
-                            <button class="view-cert-btn" data-src="ICPC.pdf" title="View Certificate"><i class="fas fa-eye"></i></button>
+                            <button class="view-cert-btn" data-src="ICPC.png" title="View Certificate"><i class="fas fa-eye"></i></button>
                         </div>
                     </div>
                     <div class="interactive-list-item">
@@ -435,6 +435,12 @@
             <input type="text" id="chat-input" placeholder="e.g., Tell me about his compiler project" required>
             <button type="submit" class="text-white px-4 py-2 rounded-md font-semibold" style="background-color: var(--accent-color);">Send</button>
         </form>
+    </div>
+
+    <!-- ADDED THIS HTML BLOCK FOR THE CERTIFICATE VIEWER -->
+    <div id="certificate-viewer" class="print-hide">
+        <span id="close-viewer">&times;</span>
+        <img id="certificate-image" src="" alt="Certificate">
     </div>
 
     <script>
@@ -537,6 +543,29 @@
             
             revealContact(document.getElementById('reveal-phone'), 'phone');
             revealContact(document.getElementById('reveal-email'), 'email');
+
+            // ADDED THIS JAVASCRIPT BLOCK FOR THE CERTIFICATE VIEWER
+            const certViewer = document.getElementById('certificate-viewer');
+            const certImage = document.getElementById('certificate-image');
+            const closeViewerBtn = document.getElementById('close-viewer');
+
+            document.querySelectorAll('.view-cert-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const imgSrc = button.dataset.src;
+                    certImage.src = imgSrc;
+                    certViewer.style.display = 'flex';
+                });
+            });
+
+            closeViewerBtn.addEventListener('click', () => {
+                certViewer.style.display = 'none';
+            });
+            
+            certViewer.addEventListener('click', (e) => {
+                if(e.target === certViewer) {
+                    certViewer.style.display = 'none';
+                }
+            });
 
         });
     </script>
